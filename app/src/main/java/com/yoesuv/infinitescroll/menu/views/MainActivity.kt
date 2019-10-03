@@ -1,7 +1,8 @@
-package com.yoesuv.infinitescroll
+package com.yoesuv.infinitescroll.menu.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.yoesuv.infinitescroll.R
 
 class MainActivity : AppCompatActivity() {
 
