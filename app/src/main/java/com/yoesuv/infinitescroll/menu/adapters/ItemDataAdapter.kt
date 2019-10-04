@@ -19,6 +19,10 @@ class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(Adapt
         const val VIEW_TYPE_ITEM = 1
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == VIEW_TYPE_ITEM) {
             val binding: ItemDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_data, parent, false)

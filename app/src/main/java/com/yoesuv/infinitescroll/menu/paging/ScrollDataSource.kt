@@ -45,7 +45,7 @@ class ScrollDataSource: PageKeyedDataSource<Int, ItemDataModel> () {
 
     }
 
-    fun updateState(state: LoadingState) {
+    private fun updateState(state: LoadingState) {
         this.loadingState.postValue(state)
     }
 }
