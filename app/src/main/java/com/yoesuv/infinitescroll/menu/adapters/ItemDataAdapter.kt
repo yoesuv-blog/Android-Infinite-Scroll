@@ -11,6 +11,7 @@ import com.yoesuv.infinitescroll.databinding.ItemLoadMoreBinding
 import com.yoesuv.infinitescroll.menu.models.ItemDataModel
 import com.yoesuv.infinitescroll.menu.viewmodels.ItemDataViewModel
 import com.yoesuv.infinitescroll.utils.AdapterCallback
+import com.yoesuv.infinitescroll.utils.LoadingState
 
 class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(AdapterCallback.DIFF_CALLBACK) {
 
@@ -19,8 +20,10 @@ class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(Adapt
         const val VIEW_TYPE_ITEM = 1
     }
 
+    private var loadingState: LoadingState = LoadingState.LOADING
+
     override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
+        return if (position < super.getItemCount()) VIEW_TYPE_ITEM else VIEW_TYPE_LOADING
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -38,6 +41,14 @@ class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(Adapt
             val itemDataModel = getItem(holder.adapterPosition)
             holder.bindData(itemDataModel)
         }
+    }
+
+    override fun getItemCount(): Int {
+        return super.getItemCount() + if (hasFooter()) 1 else 0
+    }
+
+    private fun hasFooter(): Boolean {
+        return super.getItemCount() != 0 && loadingState == LoadingState.LOADING
     }
 
     class ItemDataViewHolder(private val binding: ItemDataBinding) : RecyclerView.ViewHolder(binding.root) {
