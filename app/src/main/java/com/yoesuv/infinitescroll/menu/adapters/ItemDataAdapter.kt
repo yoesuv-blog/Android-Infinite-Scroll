@@ -3,7 +3,7 @@ package com.yoesuv.infinitescroll.menu.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yoesuv.infinitescroll.R
 import com.yoesuv.infinitescroll.databinding.ItemDataBinding
@@ -13,11 +13,11 @@ import com.yoesuv.infinitescroll.menu.viewmodels.ItemDataViewModel
 import com.yoesuv.infinitescroll.utils.AdapterCallback
 import com.yoesuv.infinitescroll.utils.LoadingState
 
-class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(AdapterCallback.DIFF_CALLBACK) {
+class ItemDataAdapter: PagedListAdapter<ItemDataModel, RecyclerView.ViewHolder>(AdapterCallback.DIFF_CALLBACK) {
 
     companion object {
-        const val VIEW_TYPE_LOADING = 0
         const val VIEW_TYPE_ITEM = 1
+        const val VIEW_TYPE_LOADING = 2
     }
 
     private var loadingState: LoadingState = LoadingState.LOADING
@@ -54,7 +54,7 @@ class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(Adapt
 
     class ItemDataViewHolder(private val binding: ItemDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(itemDataModel: ItemDataModel) {
+        fun bindData(itemDataModel: ItemDataModel?) {
             binding.itemData = ItemDataViewModel(itemDataModel)
             binding.executePendingBindings()
         }
