@@ -17,12 +17,11 @@ class ScrollDataSource: PageKeyedDataSource<Int, ItemDataModel> () {
         logDebug("ScrollDataSource # loadInitial")
         updateState(LoadingState.LOADING)
         listItemDataModel.clear()
-        for (i:Int in 0 until 20) {
-            logDebug("ScrollDataSource # loadInitial $i")
+        for (i:Int in 0..20) {
             val itemDataModel = ItemDataModel("Data ke $i")
             listItemDataModel.add(itemDataModel)
         }
-        SystemClock.sleep(2000)
+        SystemClock.sleep(Constants.DELAY_TIME)
         updateState(LoadingState.DONE)
         callback.onResult(listItemDataModel, 0, Constants.DATA_LIMIT)
     }
@@ -31,12 +30,11 @@ class ScrollDataSource: PageKeyedDataSource<Int, ItemDataModel> () {
         logDebug("ScrollDataSource # loadAfter")
         updateState(LoadingState.LOADING)
         listItemDataModel.clear()
-        for (i:Int in 0 until 20) {
-            logDebug("ScrollDataSource # loadAfter $i")
+        for (i:Int in 0..20) {
             val itemDataModel = ItemDataModel("Data ke $i")
             listItemDataModel.add(itemDataModel)
         }
-        SystemClock.sleep(2000)
+        SystemClock.sleep(Constants.DELAY_TIME)
         updateState(LoadingState.DONE)
         callback.onResult(listItemDataModel, params.key+Constants.DATA_LIMIT)
     }

@@ -27,11 +27,12 @@ class ItemDataAdapter: ListAdapter<ItemDataModel, RecyclerView.ViewHolder>(Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         if (viewType == VIEW_TYPE_ITEM) {
-            val binding: ItemDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_data, parent, false)
+            val binding: ItemDataBinding = DataBindingUtil.inflate(inflater, R.layout.item_data, parent, false)
             return ItemDataViewHolder(binding)
         } else {
-            val binding: ItemLoadMoreBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_load_more, parent, false)
+            val binding: ItemLoadMoreBinding = DataBindingUtil.inflate(inflater, R.layout.item_load_more, parent, false)
             return LoadMoreViewHolder(binding)
         }
     }
