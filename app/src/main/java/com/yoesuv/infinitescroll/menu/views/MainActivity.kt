@@ -25,8 +25,16 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.main = viewModel
 
+        setupSwipeRefresh()
         setupRecycler()
         observeLiveData()
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshMain.setOnRefreshListener {
+            binding.swipeRefreshMain.isRefreshing = false
+            viewModel.refreshListItemData()
+        }
     }
 
     private fun setupRecycler() {

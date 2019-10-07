@@ -30,4 +30,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getLoadingState(): LiveData<LoadingState> {
         return Transformations.switchMap<ScrollDataSource, LoadingState>(scrollDataSourceFactory.liveDataScrollDataSource, ScrollDataSource::loadingState)
     }
+
+    fun refreshListItemData() {
+        scrollDataSourceFactory.liveDataScrollDataSource.value?.invalidate()
+    }
 }
