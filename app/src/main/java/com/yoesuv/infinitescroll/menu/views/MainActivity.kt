@@ -10,6 +10,7 @@ import com.yoesuv.infinitescroll.R
 import com.yoesuv.infinitescroll.databinding.ActivityMainBinding
 import com.yoesuv.infinitescroll.menu.adapters.ItemDataAdapter
 import com.yoesuv.infinitescroll.menu.viewmodels.MainViewModel
+import com.yoesuv.infinitescroll.utils.logDebug
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity() {
     private fun observeLiveData() {
         viewModel.pagedListItemDataModel.observe(this, Observer {
             itemDataAdapter.submitList(it)
+        })
+        viewModel.getLoadingState().observe(this, Observer {
+            logDebug("MainActivity # getLoadingState $it")
         })
     }
 }
